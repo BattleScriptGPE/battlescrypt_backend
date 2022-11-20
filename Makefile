@@ -18,7 +18,7 @@ up:
 bash:	up
 	@docker-compose exec $(PROJECT_NAME) bash
 
-test:
+test:   up
 	@docker-compose exec -T $(PROJECT_NAME) pytest
 
 
