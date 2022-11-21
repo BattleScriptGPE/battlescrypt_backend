@@ -1,6 +1,7 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import logging
 
 SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://root:root@db:3306/gpeDb'
 
@@ -10,3 +11,12 @@ engine = create_engine(
 )
 SessionLocal = sessionmaker(autocommit=False , autoflush=False , bind=engine)
 Base = declarative_base()
+
+
+def get_db():
+    try:
+        db = SessionLocal()
+        logging.info("Connect to DB sucess")
+        return db
+    except:
+        logging.info("Connect to DB failed")

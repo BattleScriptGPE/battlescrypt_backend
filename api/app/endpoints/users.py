@@ -2,7 +2,9 @@ from fastapi import APIRouter
 from fastapi import Query 
 from fastapi.responses import JSONResponse
 import app.models.User as modelsUser
-from app.internal.database import SessionLocal , engine
+import app.internal.database as database
+import logging
+
 
 JWT_SECRET = "secret" 
 JWT_ALGO = "HS256" 
@@ -19,9 +21,10 @@ async def default_user():
 
 @router.get("/test")
 async def test():
-    db = SessionLocal()
+    db = database.get_db()
     db_user = modelsUser.User(name="test" , username="test" , password="test", mail="test",role=1)
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
+    logging.info("Push to DB Success")
     return db_user

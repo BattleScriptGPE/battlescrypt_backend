@@ -1,14 +1,10 @@
 from fastapi import FastAPI
 from app.routes import api
-from app.internal import database
-import pymysql
-import pymysql.cursors
-import time
-import jwt
 from fastapi.middleware.cors import CORSMiddleware
+import logging
 
 app = FastAPI()
-
+logging.basicConfig(level=logging.INFO)
 origins = [
     "http://localhost",
     "http://localhost:8080",
