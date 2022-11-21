@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS user ( 
+CREATE TABLE IF NOT EXISTS Users ( 
     userID INT AUTO_INCREMENT, 
     name VARCHAR(100) , 
     username VARCHAR(100) , 
