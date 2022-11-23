@@ -16,7 +16,7 @@ Base = declarative_base()
 def get_db():
     try:
         db = SessionLocal()
-        logging.info("Connect to DB sucess")
+        logging.info(" [SQL] : Connect to DB Ok")
         return db
     except:
-        logging.info("Connect to DB failed")
+        logging.info(" [SQL] : Connect to DB Failed")
