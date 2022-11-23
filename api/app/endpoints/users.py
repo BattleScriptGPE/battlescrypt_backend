@@ -19,7 +19,7 @@ async def get_user_list():
     db = database.get_db()
     userList = db.query(modelsUser.User).all()
     for raw in userList:
-        raw.password = "hiden"
+        raw.password = "hidden"
     return userList
 
 @router.get("/current")
