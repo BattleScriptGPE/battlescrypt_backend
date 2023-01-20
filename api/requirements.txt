@@ -5,3 +5,5 @@ PyMySQL
 PyJWT
 PyTest
 requests
+sqlalchemy
+bcrypt

@@ -1,7 +1,6 @@
 from fastapi import APIRouter
-from app.endpoints import users,success,stats
+from app.endpoints import auth , users
 
 router = APIRouter()
+router.include_router(auth.router)
 router.include_router(users.router)
-router.include_router(success.router)
-router.include_router(stats.router)
