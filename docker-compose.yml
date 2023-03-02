@@ -3,11 +3,14 @@ version: "3"
 services:
     fast-api:
       image: fast-api-gpe:dev
-      command:  uvicorn main:app --reload --workers 1 --host 0.0.0.0 --port 8000
       depends_on:
         - db
       ports:
         - "8081:8000"
+      environment:
+        - "DB_USER=root"
+        - "DB_PASSWORD=root"
+        - "DB_URL=db"
       volumes:
         - ./api:/app/
       networks:
