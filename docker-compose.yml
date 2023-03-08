@@ -3,34 +3,19 @@ version: "3"
 services:
     fast-api:
       image: fast-api-gpe:dev
-      depends_on:
-        - db
       ports:
         - "8081:8000"
       environment:
-        - "DB_USER=root"
-        - "DB_PASSWORD=root"
+        - "DB_USER=gpe_user"
+        - "DB_PASSWORD=jesuislepassword"
         - "DB_URL=db"
-        - "DB_PORT=3306"
+        - "DB_PORT=4406"
         - "DB_NAME=gpeDb"
       volumes:
         - ./api:/app/
       networks:
         - gpe-net
         
-    db:
-      image: db-gpe:dev
-      ports:
-        - "3306:3306"
-      environment:
-        - "MARIADB_DATABASE=gpeDb"
-        - "MARIADB_ROOT_PASSWORD=root"
-      volumes:
-        - ./databases/data:/var/lib/mysql
-      networks:
-        - gpe-net
-      
-
 networks:
   gpe-net:
 
