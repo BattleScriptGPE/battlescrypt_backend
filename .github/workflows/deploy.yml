@@ -5,11 +5,12 @@ on:
       - main
       - master
 jobs:
+
   deploy-api:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - name: Lookup
+        run: nslookup ${{ secrets.SSH_HOST }}
 
       - name: Deploy-api
         uses: appleboy/ssh-action@master
