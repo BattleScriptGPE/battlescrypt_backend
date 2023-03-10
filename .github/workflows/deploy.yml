@@ -19,4 +19,4 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           port: 22
-          script: env && bash /home/GPE/update-api.sh
+          script: env && ls /home
