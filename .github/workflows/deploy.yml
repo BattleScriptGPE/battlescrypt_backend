@@ -1,18 +1,19 @@
-name: Remote update execution
+name: deploy
 on:
   push:
     branches:
       - main
+      - master
 jobs:
-  build:
-    name: Deploy
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: executing remote ssh commands using password
-      uses: appleboy/ssh-action@master
-      with:
-        host: ${{ secrets.SSH_HOST }}
-        username: ${{ secrets.SSH_USER }}
-        key: ${{ secrets.SSH_KEY }}
-        script: |
-                    bash /home/ubuntu/GPE/update-api.sh
+      - name: deploy job
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: 22
+          script: |
+            bash /home/ubuntu/GPE/update-dev.sh
