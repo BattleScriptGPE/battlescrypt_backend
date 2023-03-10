@@ -4,6 +4,8 @@ from sqlalchemy.orm import sessionmaker
 import logging
 import os
 
+
+## SQL URL
 SQLALCHEMY_DATABASE_URL = 'mysql+pymysql://' + os.environ['DB_USER'] + ':' + os.environ['DB_PASSWORD'] + '@' + os.environ['DB_URL'] + ':' + os.environ['DB_PORT'] + '/' + os.environ['DB_NAME']
 
 
