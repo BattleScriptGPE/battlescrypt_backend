@@ -1,4 +1,4 @@
-name: deploy
+name: deploy-api-dev
 on:
   push:
     branches:
@@ -20,3 +20,4 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           port: 22
           script: export NOMAD_TOKEN=${{ secrets.NOMAD_KEY }} && bash /home/GPE/update-api.sh
+

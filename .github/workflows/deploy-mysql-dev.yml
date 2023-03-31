@@ -1,0 +1,18 @@
+name: deploy-mysql-dev
+on: [workflow_dispatch]
+jobs:
+
+  deploy-api:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lookup
+        run: nslookup ${{ secrets.SSH_HOST }}
+
+      - name: Deploy-api
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: export NOMAD_TOKEN=${{ secrets.NOMAD_KEY }} && bash /home/GPE/update-db.sh
