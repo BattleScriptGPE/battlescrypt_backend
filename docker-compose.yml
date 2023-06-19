@@ -1,6 +1,18 @@
 version: "3"
 
 services:
+    db:
+      image: db-gpe:dev
+      ports:
+        - "4406:3306"
+      environment:
+        MYSQL_USER: "gpe_user"
+        MYSQL_PASSWORD: "jesuislepassword"
+        MYSQL_DATABASE: "gpeDb"
+        MYSQL_ROOT_PASSWORD: "root"
+      networks:
+        - gpe-net
+
     fast-api:
       image: fast-api-gpe:dev
       ports:
@@ -15,7 +27,7 @@ services:
         - ./api:/app/
       networks:
         - gpe-net
-        
+
 networks:
   gpe-net:
 
