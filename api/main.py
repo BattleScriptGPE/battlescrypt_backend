@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.routes import api
+from app.router import router
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 
@@ -18,4 +18,4 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(api.router)
+app.include_router(router.router)
