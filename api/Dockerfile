@@ -1,6 +1,6 @@
 FROM python:3.9-slim
 
-WORKDIR /app
+WORKDIR /api
 COPY ./api/requirements.txt ./
 RUN apt-get -y update && apt-get install -y default-libmysqlclient-dev build-essential gcc make
 RUN /usr/local/bin/python -m pip install --upgrade pip

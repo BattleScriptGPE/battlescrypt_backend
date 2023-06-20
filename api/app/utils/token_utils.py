@@ -1,38 +1,51 @@
-from datetime import datetime, timedelta
-from typing import Union, Any
+import os
+from fastapi import Depends, HTTPException, Request, Query, status
+from pydantic import ValidationError
+
 import jwt
-import decouple
-import hashlib
+import logging
+from datetime import datetime
 
-ACCESS_TOKEN_EXPIRE_MINUTES = 30  # 30 minutes
-REFRESH_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7 # 7 days
+
+ACCESS_TOKEN_EXPIRE_MINUTES = 1200  # Changer à 1h
+REFRESH_TOKEN_EXPIRE_MINUTES = 60 * 24 * 7
 ALGORITHM = "HS256"
-JWT_SECRET_KEY = decouple.config("secret")
-JWT_REFRESH_SECRET_KEY = decouple.config("algorithm")
+JWT_SECRET_KEY = os.environ["JWT_SECRET_KEY"]
+JWT_REFRESH_SECRET_KEY = os.environ["JWT_REFRESH_SECRET_KEY"]
 
-def create_access_token(subject: Union[str, Any], expires_delta: int = None) -> str:
-    if expires_delta is not None:
-        expires_delta = datetime.utcnow() + expires_delta
-    else:
-        expires_delta = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
 
-    to_encode = {"exp": expires_delta, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, JWT_SECRET_KEY, ALGORITHM)
-    return encoded_jwt
+def verify_token(req: Request):
+    try:
+        token = req.headers["Authorization"]
+    except KeyError:
+        raise HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail="No Token",
+    headers={"WWW-Authenticate": "Bearer"},
+    )
 
-def create_refresh_token(subject: Union[str, Any], expires_delta: int = None) -> str:
-    if expires_delta is not None:
-        expires_delta = datetime.utcnow() + expires_delta
-    else:
-        expires_delta = datetime.utcnow() + timedelta(minutes=REFRESH_TOKEN_EXPIRE_MINUTES)
+    token_parsed = str.replace(str(token), "Bearer ", "")
+    logging.error(token_parsed)
 
-    to_encode = {"exp": expires_delta, "sub": str(subject)}
-    encoded_jwt = jwt.encode(to_encode, JWT_REFRESH_SECRET_KEY, ALGORITHM)
-    return encoded_jwt
+    try:
+        payload = jwt.decode(token_parsed, JWT_SECRET_KEY, algorithms=[ALGORITHM])
+        logging.error(payload)
 
-def verify_password(password: str, hashed_password: hashlib.md5) -> bool:
-    encoded = hashlib.md5(password.encode()) 
-    hashed = hashed_password.hexdigest()
-    if encoded.hexdigest() == hashed:
-        return encoded
-    return encoded
+        if datetime.fromtimestamp(payload["exp"]) < datetime.now():
+            raise HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Token expired",
+        headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    except (
+        jwt.exceptions.InvalidSignatureError,
+                jwt.ExpiredSignatureError,
+                ValidationError,
+    ):
+        raise HTTPException(
+    status_code=status.HTTP_403_FORBIDDEN,
+    detail="Could not validate credentials",
+    headers={"WWW-Authenticate": "Bearer"},
+    )
+    return True

@@ -7,3 +7,6 @@ PyTest
 requests
 sqlalchemy
 bcrypt
+mysqlclient
+python-decouple
+DateTime
