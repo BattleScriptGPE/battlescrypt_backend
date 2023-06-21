@@ -4,6 +4,14 @@ from fastapi.middleware.cors import CORSMiddleware
 import logging
 
 app = FastAPI()
+
+## active when prod deploi
+#app = FastAPI(
+#        docs_url=None, # Disable docs (Swagger UI)
+#    redoc_url=None, # Disable redoc
+#        )
+
+
 logging.basicConfig(level=logging.INFO)
 origins = [
     "http://localhost",

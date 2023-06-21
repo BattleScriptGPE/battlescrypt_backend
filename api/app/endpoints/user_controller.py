@@ -1,8 +1,9 @@
+import json
 from datetime import datetime , timedelta
 from typing import Optional
 import jwt
 import app.utils.database_utils as database
-from fastapi import APIRouter , Depends, HTTPException, status
+from fastapi import APIRouter , Depends, HTTPException, status , Request
 from app.models.models_all import User
 from app.dtos.userDto import userLoginDto , userRegisterDto
 from app.utils.token_utils import (
@@ -25,6 +26,28 @@ db = database.get_db()
 async def testing_user():
     json_return = {
         "message" : "This is test message"
+    }
+    return json_return
+
+@router.get("/me")
+async def get_me(req: Request , authorized: bool = Depends(verify_token)):
+    token = req.headers["Authorization"]
+    token_parsed = str.replace(str(token), "Bearer ", "")
+    token_decoded = jwt.decode(token_parsed , JWT_SECRET_KEY, ALGORITHM)
+    token_dump = json.dumps(token_decoded)
+    token_dump = json.loads(token_dump)
+    result = db.query(User).filter(User.mail == token_dump["sub"]).first()
+    if result is None:
+        raise HTTPException(status_code=404)
+    json_return = {
+        "id": result.id,
+        "mail": result.mail,
+        "password": result.password,
+        "username": result.username,
+        "firstname": result.firstname,
+        "lastname": result.lastname,
+        "created_at": result.created_at.isoformat(),
+        "updated_at": result.updated_at.isoformat(),
     }
     return json_return
 

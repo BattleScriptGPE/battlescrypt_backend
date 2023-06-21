@@ -75,3 +75,10 @@ async def authentication_register(userRegisterDto: userRegisterDto):
         "updated_at": result.updated_at.isoformat(),
     }
     return json_return
+
+
+@router.get("/token/decode")
+async def token_decode(token: str):
+    decoded_token = jwt.decode(token , JWT_SECRET_KEY, ALGORITHM)
+    return decoded_token
+
