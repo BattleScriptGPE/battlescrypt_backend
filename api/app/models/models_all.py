@@ -48,7 +48,8 @@ class Quest(Base):
 class Achievement(Base):
     __tablename__ = "achievement"
     id = Column(Integer, primary_key=True, index=True)
-    xp = Column(Integer, unique=True, index=True)
+    name = Column(Text, nullable=True)
+    xp_value = Column(Integer, unique=True, index=True)
     description = Column(Text, unique=True, index=True)
     metas = Column(Text, unique=True, index=True)
 

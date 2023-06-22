@@ -52,14 +52,25 @@ async def get_me(req: Request , authorized: bool = Depends(verify_token)):
     return json_return
 
 @router.get("/{user_id}", status_code=200)
-async def get_user(user_id: int , authorized: bool = Depends(verify_token)):
-    result = db.query(User).filter(User.id == user_id).first()
+async def get_user(user_id: int , req: Request ,  authorized: bool = Depends(verify_token)):
+    token = req.headers["Authorization"]
+    token_parsed = str.replace(str(token) , "Bearer " , "")
+    token_decoded = jwt.decode(token_parsed , JWT_SECRET_KEY, ALGORITHM)
+    token_dump = json.dumps(token_decoded)
+    token_dump = json.loads(token_dump)
+    result = db.query(User).filter(User.mail == token_dump["sub"]).first()
     if result is None:
         raise HTTPException(status_code=404)
+    if result.is_admin == False:
+        raise HTTPException(status_code=401)
+    result = db.query(User).filter(User.id == user_id).first()
     json_return = {
         "id": result.id,
         "mail": result.mail,
         "password": result.password,
+        "username": result.username,
+        "firstname": result.firstname,
+        "lastname": result.lastname,
         "created_at": result.created_at.isoformat(),
         "updated_at": result.updated_at.isoformat(),
     }
