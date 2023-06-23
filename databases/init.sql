@@ -46,14 +46,12 @@ PRIMARY KEY (`id`)
 
 CREATE TABLE `user_achievements`
 (
+ `id`             integer NOT NULL AUTO_INCREMENT ,
  `id_achievement` integer NOT NULL ,
  `id_user`        integer NOT NULL ,
  `done_at`        datetime NOT NULL DEFAULT NOW(),
 
-KEY `FK_1` (`id_achievement`),
-CONSTRAINT `FK_4` FOREIGN KEY `FK_1` (`id_achievement`) REFERENCES `achievement` (`id`),
-KEY `FK_2` (`id_user`),
-CONSTRAINT `FK_5` FOREIGN KEY `FK_2` (`id_user`) REFERENCES `user` (`id`)
+PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `user_quests`

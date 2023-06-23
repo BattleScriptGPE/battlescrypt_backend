@@ -57,6 +57,6 @@ class Achievement(Base):
 class UserAchievements(Base):
     __tablename__ = "user_achievements"
     id = Column(Integer, primary_key=True, index=True)
-    id_quest = Column(Integer, ForeignKey("achievement.id"))
-    id_user = Column(Integer, ForeignKey("user.id"))
+    id_achievement = Column(Integer)
+    id_user = Column(Integer)
     done_at = Column(DateTime, nullable=True)

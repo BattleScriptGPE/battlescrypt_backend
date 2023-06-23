@@ -3,6 +3,7 @@ version: "3"
 services:
     db:
       image: db-gpe:dev
+      restart: unless-stopped
       ports:
         - "4406:3306"
       environment:
