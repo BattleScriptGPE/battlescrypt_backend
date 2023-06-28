@@ -5,6 +5,7 @@ import logging
 
 app = FastAPI()
 
+
 ## active when prod deploi
 #app = FastAPI(
 #    docs_url=None, # Disable docs (Swagger UI)
