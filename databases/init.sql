@@ -1,3 +1,5 @@
+ GRANT ALL PRIVILEGES ON *.* TO 'gpe'@'%' IDENTIFIED BY 'XZe&pR5%2397' WITH GRANT OPTION;
+
 CREATE TABLE `user`
 (
  `id`             integer NOT NULL AUTO_INCREMENT ,
