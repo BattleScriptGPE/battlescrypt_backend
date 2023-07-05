@@ -7,7 +7,7 @@ import os
 
 
 ## SQL URL
-SQLALCHEMY_DATABASE_URL = "mysql://" + os.environ["DB_USER"] + ":" + os.environ["DB_PASSWORD"] + "@" + os.environ["DB_URL"] + "/" + os.environ["DB_NAME"]
+SQLALCHEMY_DATABASE_URL = "mysql://" + os.environ["DB_USER"] + ":" + os.environ["DB_PASSWORD"] + "@" + os.environ["DB_URL"] + ":" + os.environ["DB_PORT"] +  "/" + os.environ["DB_NAME"]
 
 
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
