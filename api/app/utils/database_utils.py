@@ -8,16 +8,7 @@ import os
 
 
 ## SQL URL
-connect_url = sqlalchemy.engine.url.URL(
-    "mysql+pymysql",
-    username=os.environ["DB_USER"],
-    password=os.environ["DB_PASSWORD"],
-    host=os.environ["DB_URL"],
-    port=os.environ["DB_PORT"],
-    database=os.environ["DB_NAME"],
-)
-
-engine = create_engine(connect_url)
+engine = create_engine('mysql+pymysql://' + os.environ["DB_USER"] + ':' + os.environ["DB_PASSWORD"] + '@' + os.environ["DB_URL"] + ':' + os.environ["DB_PORT"] + '/' + os.environ["DB_NAME"])
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
