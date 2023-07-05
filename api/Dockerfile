@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /api
 COPY ./api/requirements.txt ./
-RUN apt-get -y update && apt-get install -y default-libmysqlclient-dev build-essential gcc make
+RUN apt-get -y update && apt-get install -y default-libmysqlclient-dev build-essential gcc make libpq-dev pkg-config
 RUN /usr/local/bin/python -m pip install --upgrade pip
 RUN pip3 install --no-cache-dir configparser
 RUN cp /usr/local/lib/python3.9/configparser.py /usr/local/lib/python3.9/ConfigParser.py
