@@ -10,3 +10,4 @@ bcrypt
 mysqlclient
 python-decouple
 DateTime
+cryptography
