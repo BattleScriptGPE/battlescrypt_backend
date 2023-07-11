@@ -19,9 +19,9 @@ Base = declarative_base()
 
 
 def get_db():
+    logging.WARNING(os.environ["DB_PASSWORD"])
+    logging.WARNING(url_object)
     try:
-        logging.WARNING(os.environ["DB_PASSWORD"])
-        logging.WARNING(url_object)
         db = SessionLocal()
         logging.info(" [SQL] : Connect to DB Ok")
         return db
