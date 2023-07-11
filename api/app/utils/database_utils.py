@@ -19,8 +19,7 @@ url_object = URL.create(
 )
 
 print(url_object)
-engine = create_engine(url_object)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
 Base = declarative_base()
 
 
@@ -28,6 +27,8 @@ Base = declarative_base()
 
 def get_db():
     try:
+        engine = create_engine(url_object)
+        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
         db = SessionLocal()
         logging.info(" [SQL] : Connect to DB Ok")
         return db
