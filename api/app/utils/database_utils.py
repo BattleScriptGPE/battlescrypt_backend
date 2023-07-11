@@ -16,7 +16,7 @@ url_object = URL.create(
     port=int(os.environ["DB_PORT"]),
     database=os.environ["DB_NAME"],
 )
-print(url_object)
+
 
 engine = create_engine(url_object)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -25,6 +25,7 @@ Base = declarative_base()
 
 def get_db():
     try:
+        print(url_object)
         db = SessionLocal()
         logging.info(" [SQL] : Connect to DB Ok")
         return db
