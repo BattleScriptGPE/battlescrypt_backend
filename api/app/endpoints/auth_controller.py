@@ -32,9 +32,6 @@ async def testing_authentication():
 
 @router.post("/login")
 async def authentication_login(userLoginDto : userLoginDto):
-    url_object = "mysql+pymysql://{}:{}@{}:{}/{}".format(os.environ["DB_USER"], os.environ["DB_PASSWORD"], os.environ["DB_URL"], os.environ["DB_PORT"], os.environ["DB_NAME"])
-    logging.WARNING(os.environ["DB_PASSWORD"])
-    logging.WARNING(url_object)
     user: Optional[User] = (
         db.query(User).filter(User.mail == userLoginDto.mail).first()
     )
