@@ -8,18 +8,10 @@ import os
 
 
 ## SQL URL
-SQLALCHEMY_DATABASE_URL = "mariadb+pymysql://" + os.environ["DB_USER"] + ":" + os.environ["DB_PASSWORD"] + "@" + os.environ["DB_URL"] + ":" + os.environ["DB_PORT"] + "/" + os.environ["DB_NAME"] + "?charset=utf8mb4"
 
-url_object = URL.create(
-    "mariadb+pymysql",
-    username=os.environ["DB_USER"],
-    password="XZe&pR5%2397",
-    host=os.environ["DB_URL"],
-    port=int(os.environ["DB_PORT"]),
-    database=os.environ["DB_NAME"],
-)
+URL_SQL = "mysql+mysqldb://{}:{}@{}/{}".format(os.environ["DB_USER"] , os.environ["DB_PASSWORD"] , os.environ["DB_URL"] + ":" + os.environ["DB_PORT"] , os.environ["DB_NAME"])
 
-engine = create_engine(url_object)
+engine = create_engine(URL_SQL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
