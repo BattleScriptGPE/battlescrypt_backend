@@ -1,3 +1,4 @@
+import logging
 from datetime import datetime , timedelta
 from typing import Optional
 import jwt
@@ -36,6 +37,9 @@ async def authentication_login(userLoginDto : userLoginDto):
     if user is None:
         raise HTTPException(status_code=404)
     if encrypt_password(user.password) != encrypt_password(userLoginDto.password):
+        print(encrypt_password(user.password))
+        print(encrypt_password(userLoginDto.password))
+
         raise HTTPException(status_code=403)
     expire_time = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token_dict = {"exp": expire_time, "sub": userLoginDto.mail}
