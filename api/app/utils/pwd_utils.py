@@ -1,7 +1,6 @@
 import os
-import hashlib
 
 def encrypt_password(password: str):
-    hash = hashlib.md5(password.encode('utf-8'))
-    return hash.hexdigest()
-    
+    password = '1234$' + password
+    return str(password.encode('utf-8'))
+
