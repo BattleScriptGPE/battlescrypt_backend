@@ -18,7 +18,7 @@ url_object = URL.create(
     database=os.environ["DB_NAME"],
 )
 
-print(url_object)
+
 
 Base = declarative_base()
 
@@ -27,6 +27,7 @@ Base = declarative_base()
 
 def get_db():
     try:
+        print(url_object)
         engine = create_engine(url_object)
         SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
         db = SessionLocal()
