@@ -11,7 +11,7 @@ from app.utils.token_utils import (
     JWT_SECRET_KEY,
     verify_token,
 )
-
+from app.utils.pwd_utils import encrypt_password
 
 router = APIRouter(
     prefix="/auth",
@@ -24,7 +24,7 @@ db = database.get_db()
 @router.get("/testing")
 async def testing_authentication():
     json_return = {
-        "message": "This is test message"
+        "message" : "This is test message"
     }
     return json_return
 
@@ -35,7 +35,7 @@ async def authentication_login(userLoginDto : userLoginDto):
     )
     if user is None:
         raise HTTPException(status_code=404)
-    if user.password != userLoginDto.password:
+    if encrypt_password(user.password) != encrypt_password(userLoginDto.password):
         raise HTTPException(status_code=403)
     expire_time = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token_dict = {"exp": expire_time, "sub": userLoginDto.mail}
@@ -48,7 +48,7 @@ async def authentication_register(userRegisterDto: userRegisterDto):
     )
     if user is not None:
         raise HTTPException(status_code=409)
-    hashed = userRegisterDto.password.encode("utf-8")
+    hashed = encrypt_password(userRegisterDto.password)
     result: User = User(
         firstname=userRegisterDto.firstname,
         lastname=userRegisterDto.lastname,
@@ -59,10 +59,6 @@ async def authentication_register(userRegisterDto: userRegisterDto):
         created_at=datetime.now(),
         updated_at=datetime.now(),
     )
-    if hashed == userRegisterDto.password.encode("utf-8"):
-        print("Match")
-    else:
-        print("Does not match")
     if result is None:
         raise HTTPException(status_code=500)
     db.add(result)

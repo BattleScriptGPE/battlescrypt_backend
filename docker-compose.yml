@@ -26,6 +26,7 @@ services:
         - "DB_NAME=gpeDb"
         - "JWT_SECRET_KEY=GPEJWTNON"
         - "JWT_REFRESH_SECRET_KEY=GPEJWTNON"
+        - "SALT=SaLsIFiSrAndoNnEe"
       volumes:
         - ./api:/api/
       networks:

@@ -13,7 +13,7 @@ SQLALCHEMY_DATABASE_URL = "mariadb+pymysql://" + os.environ["DB_USER"] + ":" + o
 url_object = URL.create(
     "mysql+pymysql",
     username=os.environ["DB_USER"],
-    password=os.environ["DB_PASSWORD"],  # plain (unescaped) text
+    password=os.environ["DB_PASSWORD"],
     host=os.environ["DB_URL"],
     port=int(os.environ["DB_PORT"]),
     database=os.environ["DB_NAME"],
