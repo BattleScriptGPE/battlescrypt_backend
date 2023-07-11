@@ -9,17 +9,11 @@ import urllib
 
 
 ## SQL URL
-url_object = URL.create(
-    "mysql+pymysql",
-    username=os.environ["DB_USER"],
-    password=urllib.parse.quote(os.environ["DB_PASSWORD"]),
-    host=os.environ["DB_URL"],
-    port=int(os.environ["DB_PORT"]),
-    database=os.environ["DB_NAME"],
-)
+url_object = "mysql+pymysql://{}:{}@{}:{}/{}".format(os.environ["DB_USER"], os.environ["DB_PASSWORD"], os.environ["DB_URL"], os.environ["DB_PORT"], os.environ["DB_NAME"])
 
-
-
+print(url_object)
+engine = create_engine(url_object)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 
 
@@ -27,9 +21,7 @@ Base = declarative_base()
 
 def get_db():
     try:
-        print(url_object)
-        engine = create_engine(url_object)
-        SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
         db = SessionLocal()
         logging.info(" [SQL] : Connect to DB Ok")
         return db
