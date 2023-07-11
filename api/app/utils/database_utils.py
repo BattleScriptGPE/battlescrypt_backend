@@ -5,13 +5,14 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import URL
 import logging
 import os
+import urllib
 
 
 ## SQL URL
 url_object = URL.create(
-    "mariadb+pymysql",
+    "mysql+pymysql",
     username=os.environ["DB_USER"],
-    password=os.environ["DB_PASSWORD"],
+    password=urllib.parse.quote(os.environ["DB_PASSWORD"]),
     host=os.environ["DB_URL"],
     port=int(os.environ["DB_PORT"]),
     database=os.environ["DB_NAME"],
@@ -27,7 +28,6 @@ Base = declarative_base()
 
 def get_db():
     try:
-
         db = SessionLocal()
         logging.info(" [SQL] : Connect to DB Ok")
         return db

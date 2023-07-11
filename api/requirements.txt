@@ -11,3 +11,4 @@ mysqlclient
 python-decouple
 DateTime
 cryptography
+urllib
