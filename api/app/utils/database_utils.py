@@ -10,7 +10,7 @@ import urllib
 
 ## SQL URL
 url_object = "mysql+pymysql://{}:{}@{}:{}/{}".format(os.environ["DB_USER"], os.environ["DB_PASSWORD"], os.environ["DB_URL"], os.environ["DB_PORT"], os.environ["DB_NAME"])
-
+print(os.environ["DB_PASSWORD"])
 print(url_object)
 engine = create_engine(url_object)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
