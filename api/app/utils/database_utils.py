@@ -25,4 +25,3 @@ def get_db():
         return db
     except:
         logging.info(" [SQL] : Connect to DB Failed")
-        db.close()
