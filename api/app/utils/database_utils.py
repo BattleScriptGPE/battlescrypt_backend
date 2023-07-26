@@ -5,7 +5,6 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy import URL
 import logging
 import os
-import urllib
 
 
 ## SQL URL
