@@ -1,3 +1,3 @@
 FROM mariadb:latest
 
-ADD ./databases/init.sql /docker-entrypoint-initdb.d
+ADD ./databases/init.sql /docker-entrypoint-initdb.d/
