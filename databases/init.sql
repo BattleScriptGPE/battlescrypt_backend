@@ -61,11 +61,7 @@ CREATE TABLE `user_quests`
     `status`   ENUM('done', 'in progress', 'failed') NOT NULL DEFAULT 'in progress',
     `code`     TEXT NOT NULL,
     `done_at`  DATETIME NOT NULL,
-    PRIMARY KEY (`id`),
-    KEY `FK_quest` (`id_quest`),
-    KEY `FK_user` (`id_user`),
-    CONSTRAINT `FK_quest` FOREIGN KEY (`id_quest`) REFERENCES `quest` (`id`),
-    CONSTRAINT `FK_user` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`)
+    PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `download`
