@@ -21,8 +21,8 @@ class User(Base):
     line_coded = Column(Integer, default=0)
     last_connexion = Column(Time, default=0)
     experience = Column(Integer, default=0)
-    created_at = Column(DateTime, default=datetime.now())
-    updated_at = Column(DateTime, default=datetime.now())
+    created_at = Column(DateTime, default=datetime.timestamp())
+    updated_at = Column(DateTime, default=datetime.timestamp())
 
 
 class UserQuests(Base):
