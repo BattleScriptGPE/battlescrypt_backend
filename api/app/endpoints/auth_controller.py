@@ -47,10 +47,11 @@ async def authentication_login(userLoginDto : userLoginDto):
 
 @router.post("/register")
 async def authentication_register(userRegisterDto: userRegisterDto):
+    logging.info("P")
     user: Optional[User] = (
         db.query(User).filter(User.mail == userRegisterDto.mail).first()
     )
-    print(user)
+    logging.info("1")
     if user is not None:
         raise HTTPException(status_code=409)
     hashed = encrypt_password(userRegisterDto.password)
