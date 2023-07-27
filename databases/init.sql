@@ -48,7 +48,6 @@ CREATE TABLE `user_achievements`
     `id`             INT NOT NULL AUTO_INCREMENT,
     `id_achievement` INT NOT NULL,
     `id_user`        INT NOT NULL,
-    `done_at`        DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (`id`)
 );
 
@@ -59,7 +58,6 @@ CREATE TABLE `user_quests`
     `id_user`  INT NOT NULL,
     `status`   ENUM('done', 'in progress', 'failed') NOT NULL DEFAULT 'in progress',
     `code`     TEXT NOT NULL,
-    `done_at`  DATETIME NOT NULL,
     PRIMARY KEY (`id`)
 );
 
