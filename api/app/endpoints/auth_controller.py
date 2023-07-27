@@ -37,7 +37,7 @@ async def authentication_login(userLoginDto : userLoginDto):
     )
     if user is None:
         raise HTTPException(status_code=404)
-    if encrypt_password(str(user.password)) != userLoginDto.password:
+    if user.password != encrypt_password(userLoginDto.password):
         raise HTTPException(status_code=401)
     expire_time = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token_dict = {"exp": expire_time, "sub": userLoginDto.mail}
