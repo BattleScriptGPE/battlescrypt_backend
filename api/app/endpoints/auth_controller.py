@@ -39,8 +39,6 @@ async def authentication_login(userLoginDto : userLoginDto):
         raise HTTPException(status_code=404)
     if encrypt_password(str(user.password)) != userLoginDto.password:
         raise HTTPException(status_code=401)
-    else:
-        raise HTTPException(status_code=403)
     expire_time = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
     access_token_dict = {"exp": expire_time, "sub": userLoginDto.mail}
     return {"access_token": jwt.encode(access_token_dict, JWT_SECRET_KEY, ALGORITHM)}
