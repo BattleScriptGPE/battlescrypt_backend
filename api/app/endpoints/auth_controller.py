@@ -69,8 +69,6 @@ async def authentication_register(userRegisterDto: userRegisterDto):
         "id": result.id,
         "mail": result.mail,
         "password": result.password,
-        "created_at": result.created_at.isoformat(),
-        "updated_at": result.updated_at.isoformat(),
     }
     return json_return
 
