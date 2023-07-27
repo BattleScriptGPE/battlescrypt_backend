@@ -50,6 +50,7 @@ async def authentication_register(userRegisterDto: userRegisterDto):
     user: Optional[User] = (
         db.query(User).filter(User.mail == userRegisterDto.mail).first()
     )
+    print(user)
     if user is not None:
         raise HTTPException(status_code=409)
     hashed = encrypt_password(userRegisterDto.password)
