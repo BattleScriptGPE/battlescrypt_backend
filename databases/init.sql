@@ -15,11 +15,9 @@ CREATE TABLE `user`
     `password`       VARCHAR(255) NOT NULL,
     `username`       VARCHAR(45) NOT NULL,
     `is_admin`       TINYINT(1) NOT NULL DEFAULT 0,
-    `time_played`    INT NOT NULL DEFAULT 0,
     `wins`           INT NOT NULL DEFAULT 0,
     `defeats`        INT NOT NULL DEFAULT 0,
     `line_coded`     INT NOT NULL DEFAULT 0,
-    `last_connexion` TIME NOT NULL DEFAULT '00:00:00',
     `experience`     INT NOT NULL DEFAULT 0,
     PRIMARY KEY (`id`)
 );

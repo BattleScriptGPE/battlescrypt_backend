@@ -15,11 +15,9 @@ class User(Base):
     username = Column(String, unique=True)
     password = Column(String)
     is_admin = Column(Boolean, default=False)
-    time_played = Column(Time, default=0)
     wins = Column(Integer, default=0)
     defeats = Column(Integer, default=0)
     line_coded = Column(Integer, default=0)
-    last_connexion = Column(Time, default=0)
     experience = Column(Integer, default=0)
 
 
@@ -30,7 +28,6 @@ class UserQuests(Base):
     id_user = Column(Integer, ForeignKey("user.id"))
     status = Column(Enum)
     code = Column(Text, nullable=True)
-    done_at = Column(DateTime, nullable=True)
 
 
 class Quest(Base):
@@ -57,4 +54,3 @@ class UserAchievements(Base):
     id = Column(Integer, primary_key=True, index=True)
     id_achievement = Column(Integer)
     id_user = Column(Integer)
-    done_at = Column(DateTime, nullable=True)
