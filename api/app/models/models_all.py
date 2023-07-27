@@ -54,3 +54,8 @@ class UserAchievements(Base):
     id = Column(Integer, primary_key=True, index=True)
     id_achievement = Column(Integer)
     id_user = Column(Integer)
+
+class Download(Base):
+    __tablename__ = "download"
+    id = Column(Integer, primary_key=True, index=True)
+    nb_download = Column(Integer)
