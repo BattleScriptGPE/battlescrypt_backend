@@ -12,7 +12,7 @@ from app.utils.token_utils import (
     JWT_SECRET_KEY,
     verify_token,
 )
-from app.utils.pwd_utils import encrypt_password , decrypt_password
+from app.utils.pwd_utils import encrypt_password
 import os
 
 router = APIRouter(
