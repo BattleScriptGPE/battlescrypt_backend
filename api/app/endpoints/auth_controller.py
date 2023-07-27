@@ -59,9 +59,7 @@ async def authentication_register(userRegisterDto: userRegisterDto):
         age=userRegisterDto.age,
         username=userRegisterDto.username,
         mail=userRegisterDto.mail,
-        password=hashed,
-        created_at=datetime.timestamp(),
-        updated_at=datetime.timestamp(),
+        password=hashed
     )
     if result is None:
         raise HTTPException(status_code=500)
