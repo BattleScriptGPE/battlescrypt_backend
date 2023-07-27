@@ -21,8 +21,6 @@ CREATE TABLE `user`
     `line_coded`     INT NOT NULL DEFAULT 0,
     `last_connexion` TIME NOT NULL DEFAULT '00:00:00',
     `experience`     INT NOT NULL DEFAULT 0,
-    `created_at`     DATETIME NOT NULL DEFAULT NOW(),
-    `updated_at`     DATETIME NOT NULL DEFAULT NOW(),
     PRIMARY KEY (`id`)
 );
 
